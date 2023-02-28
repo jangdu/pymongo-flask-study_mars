@@ -60,9 +60,22 @@
             show_order();
         });
         function show_order() {
+            $("#order-box").empty();
             fetch('/mars').then((res) => res.json()).then((data) => {
+                let rows = data['result']
                 console.log(data)
-                alert(data['msg'])
+                rows.forEach((a) => {
+                  let name = a["name"];
+                  let address = a["address"];
+                  let size = a["size"];
+
+                  let temp_html = `<tr>
+                            <td>${name}</td>
+                            <td>${address}</td>
+                            <td>${size}</td>
+                          </tr>`;
+                  $("#order-box").append(temp_html);
+                })
             })
         }
         function save_order() {
